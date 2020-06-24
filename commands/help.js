@@ -16,7 +16,7 @@ const commands =
 
 // Embed for Normal Users
 const helpEmbed = new Discord.RichEmbed()
-	.setTItle(embedTitle)
+	.setTitle(embedTitle)
 	.setDescription(embedDesc)
 	.setColor(embedColor)
 	.addField('Server Commands', `${commands}`)
@@ -24,7 +24,7 @@ const helpEmbed = new Discord.RichEmbed()
 
 // Embed for Staff Members [Moderator +]
 const helpEmbedStaff = new Discord.RichEmbed()
-	.setTItle(embedTitle)
+	.setTitle(embedTitle)
 	.setDescription(embedDesc)
 	.setColor(embedColor)
 	.addField('Server Commands', `${commands}`)

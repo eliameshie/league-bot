@@ -4,7 +4,7 @@ const bot = new Discord.Client();
 const TOKEN = process.env.TOKEN;
 const fs = require('fs');
 const PREFIX = '!'
-const version = '1.0.1'
+const version = '1.0.2'
 
 
 // Queue Bot 
@@ -38,6 +38,9 @@ bot.on('message', message => {
             bot.commands.get('help').execute(message, args);
         break;
 
+        case "match":
+            bot.commands.get('match').execute(message, args);
+        break;
 
 
 

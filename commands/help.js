@@ -5,7 +5,7 @@ const Discord = require('discord.js');
 const embedTitle = 'Nero League Commands';
 const embedDesc = 'Useful Commands for Nero League';
 const embedColor = '57467B';
-const embedFooter = '- Developed by Nero Studios LLC';
+const embedFooter = 'Developed by Nero Studios LLC';
 const errorColor = 'D0CFEC';
 
 // Our Commands We'll Have

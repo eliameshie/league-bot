@@ -17,16 +17,22 @@ const commands =
 !teams - Show teams registered.
 `
 
-// Embed for Errors & Confirmations
+// Embed for Errors 
 const errorEmbed100 = new Discord.RichEmbed()
-	.setTitle('ERROR: E100')
+	.setTitle('ERROR: NS100')
 	.setColor(errorColor)
 	.setDescription("Couldn't find channel.")
 
 const errorEmbed200 = new Discord.RichEmbed()
-	.setTitle('ERROR: E200')
+	.setTitle('ERROR: NS200')
 	.setColor(errorColor)
 	.setDescription("Missing Arguments.")
+
+
+const errorEmbed300 = new Discord.RichEmbed()
+	.setTitle('ERROR: NS300')
+	.setColor(errorColor)
+	.setDescription("Wrong Channel.")
 
 
 module.exports = {
@@ -38,7 +44,6 @@ const matchAddConfirmationEmbed = new Discord.RichEmbed()
 	.setTitle('Match Successfully Added')
 	.setColor(embedColor)
 	.setDescription(`**${args[2]}** [${args[4]}] *vs.* **${args[3]}** [${args[5]}] `)
-
 
 
 const matchChannel = message.guild.channels.find(channel => channel.name === 'matches')
@@ -54,10 +59,7 @@ const match = new Match({
 	datePlayed: message.createdAt
 });
 
-if(!args[2]) return message.reply(errorEmbed200)
-if(!args[3]) return message.reply(errorEmbed200)
-if(!args[4]) return message.reply(errorEmbed200)
-if(!args[5]) return message.reply(errorEmbed200)
+
 
 if(args[1] === 'add' && args[2].length > 0 && args[3].length > 0 && args[4].length > 0 && args[5].length > 0) {
 	match.save()
@@ -69,9 +71,30 @@ if(args[1] === 'add' && args[2].length > 0 && args[3].length > 0 && args[4].leng
 	});
 
 } else {
-	message.reply(errorEmbed200)
+	message.reply(errorEmbed200);
 }
 
+
+if(args[1] === 'view' && args[2].length > 0) {
+	Match.findOne({
+		team1: `${args[2]}`
+	}, (err, teamMatches) => {
+		if (err) throw err;
+		console.log(teamMatches)
+
+	const teamMatchesEmbed = new Discord.RichEmbed()
+		.setTitle(`Recent Matches`)
+		.setDescription(`**${args[2].toUpperCase()}**`)
+		.setColor(embedColor)
+		.addField('Matches', `**** [] *vs* **** []`)
+		.setFooter(embedFooter)
+
+		matchChannel.send(teamMatchesEmbed)
+	})
+
+} else {
+	message.reply(errorEmbed200);
+}
 
     } 
 }
